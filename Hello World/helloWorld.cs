@@ -29,12 +29,6 @@ namespace WindowsFormsApplication1
             sayHello(txtBox.Text);
         }
 
-        private void txtBox_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e) 
-        {
-            lblSubmit.Text = "...";
-            Console.Write("...");
-        }
-
         public void sayHello(string name)
         // Say Hello
         {
