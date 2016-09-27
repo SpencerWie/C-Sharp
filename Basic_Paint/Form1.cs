@@ -29,6 +29,7 @@ namespace Basic_Paint
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
             this.canvas_anyColor.Paint += new System.Windows.Forms.PaintEventHandler(this.btnColors_Paint);
+            canvas.Image = new Bitmap(canvas.Width, canvas.Height);
         }
 
         private void btnColors_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -46,10 +47,11 @@ namespace Basic_Paint
         private void canvas_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         // Draw all our strokes. And the color corrisponding to each stroke.
         {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            var g = Graphics.FromImage(canvas.Image);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             for (int i = 0; i < strokesList.Count; i++)
             {
-                e.Graphics.DrawLines(penList[i], strokesList[i].ToArray());
+                g.DrawLines(penList[i], strokesList[i].ToArray());
             }
         }
 
@@ -79,8 +81,8 @@ namespace Basic_Paint
         // Stop drawing
         {
             drawing = false;
-            currentStroke.Add(e.Location); // Adds second point for required line if mouse doesn't move
-            // debug information
+            if (currentStroke == null) canvas_MouseDown(sender, e); // If there was no mousedown event call it.
+            currentStroke.Add(e.Location);                          // Adds second point for required line if mouse doesn't move
             this.Refresh();
         }
 
@@ -90,12 +92,14 @@ namespace Basic_Paint
             myPen = new Pen(color, brushSize.Value);
             myPen.Width = brushSize.Value;
             // debug information
-            Console.WriteLine(myPen.Width);
+            this.txtWidth.Text = brushSize.Value.ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        // On clear empty list and repaint
+        private void btnClear_Click(object sender, EventArgs e)
+        // On clear empty list and clear canvas, then repaint
         {
+            var g = Graphics.FromImage(canvas.Image);
+            g.FillRectangle(new SolidBrush(Color.White), canvas.ClientRectangle);
             strokesList.Clear();
             penList.Clear();
             canvas.Refresh();
@@ -103,38 +107,52 @@ namespace Basic_Paint
 
         private void btnRed_Click(object sender, EventArgs e)
         {
-            color = Color.Red;
-            myPen = new Pen(color, brushSize.Value);
+            setColor(Color.Red);
         }
 
         private void btnBlue_Click(object sender, EventArgs e)
         {
-            color = Color.Blue;
-            myPen = new Pen(color, brushSize.Value);
+            setColor(Color.Blue);
         }
 
         private void btnYellow_Click(object sender, EventArgs e)
         {
-            color = Color.Yellow;
-            myPen = new Pen(color, brushSize.Value);
+            setColor(Color.Yellow);
         }
 
         private void btnGreen_Click(object sender, EventArgs e)
         {
-            color = Color.Lime;
-            myPen = new Pen(color, brushSize.Value);
+            setColor(Color.Lime);
         }
 
         private void btnOrange_Click(object sender, EventArgs e)
         {
-            color = Color.Orange;
-            myPen = new Pen(color, brushSize.Value);
+            setColor(Color.Orange);
         }
 
         private void btnAqua_Click(object sender, EventArgs e)
         {
-            color = Color.Aqua;
-            myPen = new Pen(color, brushSize.Value);
+            setColor(Color.Aqua);
+        }
+
+        private void btnDarkGray_Click(object sender, EventArgs e)
+        {
+            setColor(Color.DarkGray);
+        }
+
+        private void btnLightGray_Click(object sender, EventArgs e)
+        {
+            setColor(Color.LightGray);
+        }
+
+        private void btnBlack_Click(object sender, EventArgs e)
+        {
+            setColor(Color.Black);
+        }
+
+        private void btnWhite_Click(object sender, EventArgs e)
+        {
+            setColor(Color.White);
         }
 
         private void canvas_anyColor_Click(object sender, EventArgs e)
@@ -148,22 +166,55 @@ namespace Basic_Paint
             MyDialog.Color = color;
 
             // Update the text box color if the user clicks OK 
-            if (MyDialog.ShowDialog() == DialogResult.OK)
-                color = MyDialog.Color;
+            if (MyDialog.ShowDialog() == DialogResult.OK) color = MyDialog.Color;
 
+            setColor(color);
+        }
+
+        private void txtWidth_TextChanged(object sender, EventArgs e)
+        {
+            // Set the brush size to the value of the text, max a 500.
+            int value = 1;
+            try {
+                value = Int32.Parse(this.txtWidth.Text);
+            } catch(FormatException E) { /*Do nothing on bad input, will be treated as 1*/ }
+            if (value < 1) value = 1;
+            else if (value > 50) value = 50;
+            brushSize.Value = value;
+            myPen = new Pen(color, brushSize.Value);
+            myPen.Width = brushSize.Value;
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamReader sr = new System.IO.StreamReader(openFileDialog1.FileName);
+                Image img = new Bitmap(openFileDialog1.FileName);
+                canvas.Image = img;
+                sr.Close();
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "PNG Image|*.png|JPeg Image|*.jpg|Gif Image|*.gif";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Image img = canvas.Image;
+                img.Save(saveFileDialog1.FileName);
+            }
+        }
+
+        private void setColor(Color color) {
             myPen = new Pen(color, brushSize.Value);
         }
 
-        private void btnDarkGray_Click(object sender, EventArgs e)
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            color = Color.DarkGray;
-            myPen = new Pen(color, brushSize.Value);
-        }
-
-        private void btnLightGray_Click(object sender, EventArgs e)
-        {
-            color = Color.LightGray;
-            myPen = new Pen(color, brushSize.Value);
+            if(penList.Count > 0) penList.RemoveAt(penList.Count - 1);
+            if (strokesList.Count > 0) strokesList.RemoveAt(strokesList.Count - 1);
+            canvas.Refresh();
         }
     }
 }
