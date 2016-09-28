@@ -12,4 +12,5 @@
 <ul>
 <li>Dynamic text box for brush size</li>
 <li>Menu System (support loading and saving images)</li>
+<li>Undo functionality added</li>
 </ul>
