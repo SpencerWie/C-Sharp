@@ -19,6 +19,7 @@ namespace Basic_Paint
         private Color color = Color.Red;                                            // Default color of red
         private System.Drawing.Pen myPen = new Pen(Color.Red, 5);                   // Starting Pen is red with a width of5
         private bool drawing = false;                                               // Currently not drawing on the canvas (mouse not held down)
+        private Image canvasImg;                                                    // When a image is loaded store it here so it's redrawn on paint events
 
         public Form1()
         {
@@ -49,6 +50,10 @@ namespace Basic_Paint
         {
             var g = Graphics.FromImage(canvas.Image);
             g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.FillRectangle(new SolidBrush(Color.White), canvas.ClientRectangle);
+            if (canvasImg != null) {
+                g.FillRectangle(new TextureBrush(canvasImg, canvas.ClientRectangle), canvas.ClientRectangle);
+            }
             for (int i = 0; i < strokesList.Count; i++)
             {
                 g.DrawLines(penList[i], strokesList[i].ToArray());
@@ -191,6 +196,7 @@ namespace Basic_Paint
             {
                 System.IO.StreamReader sr = new System.IO.StreamReader(openFileDialog1.FileName);
                 Image img = new Bitmap(openFileDialog1.FileName);
+                canvasImg = new Bitmap(openFileDialog1.FileName); // This way there is not a shallow copy so canvasImg is not tired to canvas.Image
                 canvas.Image = img;
                 sr.Close();
             }
@@ -212,7 +218,7 @@ namespace Basic_Paint
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(penList.Count > 0) penList.RemoveAt(penList.Count - 1);
+            if (penList.Count > 0) penList.RemoveAt(penList.Count - 1);
             if (strokesList.Count > 0) strokesList.RemoveAt(strokesList.Count - 1);
             canvas.Refresh();
         }
