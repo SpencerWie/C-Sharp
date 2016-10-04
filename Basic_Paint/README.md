@@ -15,7 +15,8 @@
 <li>Undo functionality added</li>
 </ul>
 
-<p>Known Bugs</p>
+<p>Known Bugs:</p>
 <ul>
 <li><strike>Image being cleared on paint</strike> - Was due to shallow copy of canvas.Image, creating a new instance fixed this bug.</li>
+<li>Low paint pixel quality</li>
 </ul>
