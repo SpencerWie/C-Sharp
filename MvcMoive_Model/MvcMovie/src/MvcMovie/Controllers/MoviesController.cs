@@ -20,9 +20,16 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _context.Movie.ToListAsync());
+            var moives = from m in _context.Movie select m; // define LINQ query to select moives (current would select all)
+
+            // If the search string is defined (not empty) filter moives on that string
+            if (!String.IsNullOrEmpty(search)) {
+                moives = moives.Where(moive => moive.Title.Contains(search));
+            }
+
+            return View(await moives.ToListAsync());
         }
 
         // GET: Movies/Details/5
