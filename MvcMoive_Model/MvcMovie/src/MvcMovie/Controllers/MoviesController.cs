@@ -20,16 +20,29 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index(string search)
+        public async Task<IActionResult> Index(string movieGenre, string search)
         {
-            var moives = from m in _context.Movie select m; // define LINQ query to select moives (current would select all)
+            var movies = from m in _context.Movie select m; // define LINQ query to select moives (current would select all)
+
+            IQueryable<string> genres = from m in _context.Movie orderby m.Genre select m.Genre; // Get all Genres from database
 
             // If the search string is defined (not empty) filter moives on that string
-            if (!String.IsNullOrEmpty(search)) {
-                moives = moives.Where(moive => moive.Title.Contains(search));
+            if (!String.IsNullOrEmpty(search))
+            {
+                movies = movies.Where(movie => movie.Title.Contains(search));
             }
 
-            return View(await moives.ToListAsync());
+            // If we select a genre and filter moives by that
+            if (!String.IsNullOrEmpty(movieGenre))
+            {
+                movies = movies.Where(movie => movie.Genre == movieGenre);
+            }
+
+            var movieGenreVM = new MovieGenreViewModel();                                  // Create MovieGenreView Model
+            movieGenreVM.genres = new SelectList(await genres.Distinct().ToListAsync());   // Assign genres to select list
+            movieGenreVM.movies = await movies.ToListAsync();                              // Assign movies to the filtered movies based on the search
+
+            return View(movieGenreVM);
         }
 
         // GET: Movies/Details/5
