@@ -9,17 +9,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MvcMovie.Data;
-using MvcMovie.Models;
-using MvcMovie.Services;
+using entityFrameworkDB_test.Data;
+using entityFrameworkDB_test.Models;
+using entityFrameworkDB_test.Services;
 
-namespace MvcMovie
+namespace entityFrameworkDB_test
 {
     public class Startup
     {
         public Startup(IHostingEnvironment env)
         {
-            // Build configuration information, using the appsettings.json file (contains logging/dbString)
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -33,9 +32,9 @@ namespace MvcMovie
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
-            // Setup environment variables from config files
+
             builder.AddEnvironmentVariables();
-            Configuration = builder.Build(); // Define Configuration
+            Configuration = builder.Build();
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -46,17 +45,17 @@ namespace MvcMovie
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddDbContext<ApplicationDbContext>(options =>                             // Makes application use SQL Server, uses connection string
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();                                                                 // Adds ASP.NET MVC to project
+            services.AddMvc();
 
             // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();                          // Addes message senders
+            services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
@@ -65,7 +64,7 @@ namespace MvcMovie
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            // app.Use*() -- Adds middleware to the project
+
             app.UseApplicationInsightsRequestTelemetry();
 
             if (env.IsDevelopment())
@@ -86,15 +85,13 @@ namespace MvcMovie
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            // Add seed data as default for the database
-            SeedData.Initialize(app.ApplicationServices);
         }
     }
 }
