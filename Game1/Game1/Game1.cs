@@ -13,6 +13,14 @@ namespace Game1
         SpriteBatch spriteBatch;
         Color bgColor = Color.White;
 
+        Texture2D playerTexture;
+        int spriteSize = 64;
+        double speed = 1;
+        Vector2 position;
+        Rectangle drawRect;
+
+        SpriteFont font;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -40,7 +48,10 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            playerTexture = Content.Load<Texture2D>(@"player");
+            position = new Vector2(0, 0);
+            drawRect = new Rectangle(200, 200, spriteSize, spriteSize);
+            font = Content.Load<SpriteFont>("Arial");
             // TODO: use this.Content to load your game content here
         }
 
@@ -63,7 +74,17 @@ namespace Game1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) || Keyboard.GetState().IsKeyDown(Keys.A))
+                drawRect.X -= (int)speed;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
+                drawRect.X += (int)speed;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) || Keyboard.GetState().IsKeyDown(Keys.W))
+                drawRect.Y -= (int)speed;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.S))
+                drawRect.Y += (int)speed;
 
             base.Update(gameTime);
         }
@@ -76,12 +97,15 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            fillRect(50, 50, 50, 50, Color.Red, gameTime);
-            fillRect(100, 100, 50, 50, Color.Blue, gameTime);
+            spriteBatch.Begin();
+                spriteBatch.DrawString(font, "Use the Arrow Keys or (AWDS keys) to move", new Vector2(0, 0), Color.White);
+                spriteBatch.Draw(playerTexture, drawRect, new Rectangle(0, spriteSize*2, spriteSize, spriteSize), Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
-
+        /*
+        // Function mainly created for testing purposes
         public void fillRect(int x, int y, int width, int height, Color color, GameTime gameTime)
         {
             // Create Rectangle
@@ -103,5 +127,6 @@ namespace Game1
             spriteBatch.Dispose();
             rect.Dispose();
         }
+        */
     }
 }
