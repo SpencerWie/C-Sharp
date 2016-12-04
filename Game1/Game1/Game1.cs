@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Game1
 {
@@ -13,11 +14,9 @@ namespace Game1
         SpriteBatch spriteBatch;
         Color bgColor = Color.White;
 
-        Texture2D playerTexture;
-        int spriteSize = 64;
-        double speed = 1;
-        Vector2 position;
-        Rectangle drawRect;
+        Player player;
+
+        Texture2D background;
 
         SpriteFont font;
 
@@ -48,11 +47,17 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            playerTexture = Content.Load<Texture2D>(@"player");
-            position = new Vector2(0, 0);
-            drawRect = new Rectangle(200, 200, spriteSize, spriteSize);
+
+            player = new Player(Content.Load<Texture2D>(@"player"), new Vector2(0,0), 64);
+            int windowWidth = GraphicsDevice.Viewport.Bounds.Width / 2;
+            int windowHeight = GraphicsDevice.Viewport.Bounds.Height / 2;
+            player.position = new Vector2(windowWidth - (player.spriteSize/2), windowHeight - (player.spriteSize / 2)); // Move player to center
+
+            background = Content.Load<Texture2D>(@"background");
+            Scroller.X = 0;
+            Scroller.Y = 0;
+
             font = Content.Load<SpriteFont>("Arial");
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -74,17 +79,7 @@ namespace Game1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) || Keyboard.GetState().IsKeyDown(Keys.A))
-                drawRect.X -= (int)speed;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
-                drawRect.X += (int)speed;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) || Keyboard.GetState().IsKeyDown(Keys.W))
-                drawRect.Y -= (int)speed;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.S))
-                drawRect.Y += (int)speed;
+            player.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -97,36 +92,15 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-                spriteBatch.DrawString(font, "Use the Arrow Keys or (AWDS keys) to move", new Vector2(0, 0), Color.White);
-                spriteBatch.Draw(playerTexture, drawRect, new Rectangle(0, spriteSize*2, spriteSize, spriteSize), Color.White);
+            // Draw while not interpleting (bluring) half-pixels 
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, null, null, Matrix.CreateTranslation(-Scroller.X, -Scroller.Y, 0));
+
+            spriteBatch.Draw(background, new Rectangle(0, 0, background.Width, background.Height), Color.White);
+            spriteBatch.DrawString(font, "Frame Ticks: "+player.frameTicks, new Vector2(Scroller.X, Scroller.Y), Color.White);
+            player.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
-        /*
-        // Function mainly created for testing purposes
-        public void fillRect(int x, int y, int width, int height, Color color, GameTime gameTime)
-        {
-            // Create Rectangle
-            Texture2D rect;
-
-            // Load Sprite
-            base.LoadContent();
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            rect = new Texture2D(GraphicsDevice, 1, 1);
-            rect.SetData(new[] { color });
-
-            // Draw Rectangle
-            spriteBatch.Begin();
-                spriteBatch.Draw(rect, new Rectangle(x, y, width, height), color);
-            spriteBatch.End();
-
-            // UnLoad Sprite
-            base.UnloadContent();
-            spriteBatch.Dispose();
-            rect.Dispose();
-        }
-        */
     }
 }
