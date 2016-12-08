@@ -12,6 +12,8 @@ Instead updates to the main game along with it's current progress will be recore
 * Tilemapping system.
 * Tile Collisions with player
 * Player Sprinting mechanic (*basic*)
+* Added Fullscreen mode along with scaling
 
 ---
 
+*Note:* A update will be made to this readme file whenever an importaint commit is made in the private directory of this project.
