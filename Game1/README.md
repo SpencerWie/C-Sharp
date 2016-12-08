@@ -8,9 +8,10 @@ Instead updates to the main game along with it's current progress will be recore
 <h3>Town RPG</h3>
 
 <h4>Version 0.01</h4>
-* Added Player and walking animations.
-* Added Tilemapping system.
-* Added Tile Collisions with player
+* Player and walking animations.
+* Tilemapping system.
+* Tile Collisions with player
+* Player Sprinting mechanic (*basic*)
 
 ---
 
