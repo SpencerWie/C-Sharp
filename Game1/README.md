@@ -10,6 +10,7 @@ Instead updates to the main game along with it's current progress will be recore
 <h4>Version 0.01</h4>
 * Added Player and walking animations.
 * Added Tilemapping system.
+* Added Tile Collisions with player
 
 ---
 
