@@ -13,7 +13,8 @@ Instead updates to the main game along with it's current progress will be recore
 * Tile Collisions with player
 * Player Sprinting mechanic (*basic*)
 * Added Fullscreen mode along with scaling
+* Added Door functionality, player can now move between maps using doorways
 
 ---
 
-*Note:* A update will be made to this readme file whenever an importaint commit is made in the private directory of this project.
+*Note:* A update will be made to this readme file whenever an importaint commit is made in the private directory of this project. 
