@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Game1
 {
@@ -18,11 +19,14 @@ namespace Game1
 
         Player player;
 
-        Texture2D background;
+        Texture2D caveTileSheet;
+
+        //Tile[] tiles;
+        List<Tile> tiles = new List<Tile>();
 
         SpriteFont font;
 
-        int[] mapArray;
+        dynamic jsonObj;
 
         public Game1()
         {
@@ -57,11 +61,13 @@ namespace Game1
             int windowHeight = GraphicsDevice.Viewport.Bounds.Height / 2;
             player.position = new Vector2(windowWidth - (player.spriteSize/2), windowHeight - (player.spriteSize / 2)); // Move player to center
 
-            background = Content.Load<Texture2D>(@"cave");
+            caveTileSheet = Content.Load<Texture2D>(@"cave");
             Scroller.X = 0;
             Scroller.Y = 0;
 
             LoadJson("cave_1.json");
+
+            loadMap(caveTileSheet, 16, 32, spriteBatch);
 
             font = Content.Load<SpriteFont>("Arial");
         }
@@ -101,9 +107,9 @@ namespace Game1
             // Draw while not interpleting (bluring) half-pixels 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, null, null, Matrix.CreateTranslation(-Scroller.X, -Scroller.Y, 0));
 
-            spriteBatch.Draw(background, new Rectangle(0, 0, background.Width, background.Height), Color.White);
-            drawMap(mapArray, background, 16, 32, spriteBatch);
+            drawMap(caveTileSheet, 16, 32, spriteBatch);
             player.Draw(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -115,21 +121,26 @@ namespace Game1
             using (StreamReader r = new StreamReader(file)) {
                  json = r.ReadToEnd();
             }
-            dynamic o = JsonConvert.DeserializeObject(json);
-            mapArray = (int[])o.layers[0].data.ToObject(typeof(int[]));
+            jsonObj = JsonConvert.DeserializeObject(json);
         }
 
-        public void drawMap(int[] map, Texture2D tilemap, int tileSize, int drawSize ,SpriteBatch spriteBatch)
+        public void drawMap(Texture2D tilemap, int tileSize, int drawSize , SpriteBatch spriteBatch)
         {
-            int tileWidth = 30;// Used to turn id's to positions 
+            for (int i = 0; i < tiles.Count; i++) tiles[i].Draw(spriteBatch, tilemap, drawSize);
+        }
+
+        public void loadMap(Texture2D tilemap, int tileSize, int drawSize, SpriteBatch spriteBatch)
+        {
+            int tileWidth = (int)jsonObj.layers[0].width.ToObject(typeof(int));
+            int[] map = (int[])jsonObj.layers[0].data.ToObject(typeof(int[]));
 
             for (int i = 0; i < map.Length; i++)
             {
                 int x = (i % tileWidth) * drawSize;
                 int y = (int)(i / tileWidth) * drawSize;
-                int sourceX = ((map[i]-1) % tileSize) * tileSize;
-                int sourceY = ((map[i]-1) / tileSize) * tileSize;
-                spriteBatch.Draw(tilemap, new Rectangle(x, y, drawSize, drawSize), new Rectangle(sourceX, sourceY, tileSize, tileSize), Color.White);
+                int sourceX = ((map[i] - 1) % tileSize) * tileSize;
+                int sourceY = ((map[i] - 1) / tileSize) * tileSize;
+                tiles.Add(new Tile(new Vector2(x, y), new Vector2(sourceX, sourceY), tileSize));
             }
         }
     }
