@@ -7,6 +7,8 @@ Instead updates to the main game along with it's current progress will be recore
 ---
 <h3>Town RPG</h3>
 
+<img src="gamePic.PNG"></img>
+
 <h4>Version 0.02</h4>
 * Added basic lighting system (*back world light and object light*)
 
