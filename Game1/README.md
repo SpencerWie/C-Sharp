@@ -12,7 +12,7 @@ Instead updates to the main game along with it's current progress will be recore
 <h4>Version 0.02</h4>
 * Added basic lighting system (*back world light and object light*), placed into *Map* class.
 * Added Attacking Animation
-* Enemy Slime Added (*Drawn only*)
+* Enemy Slime Added (*Random Movement and collision system*)
 
 <h4>Version 0.01</h4>
 * Player and walking animations.
