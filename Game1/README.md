@@ -13,6 +13,7 @@ Instead updates to the main game along with it's current progress will be recore
 * Added basic lighting system (*back world light and object light*), placed into *Map* class.
 * Added Attacking Animation
 * Enemy Slime Added (*Random Movement and collision system*)
+* Tile Drawing is now optimized for large maps. Before-hand all tiles on the map where looped and drawn, now tiles are stored in a 2D array and are directly accessed for drawing based on the player position (*the visible tiles on the screen*).
 
 <h4>Version 0.01</h4>
 * Player and walking animations.
