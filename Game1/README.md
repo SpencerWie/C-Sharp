@@ -17,6 +17,7 @@ Instead updates to the main game along with it's current progress will be recore
 * Collisions are now optimized for large maps. Now colliadable items only check collision with it's neightbooring tiles.
 * Bug Fixed: Enemy timers causing frame stuttering.
 * Slimes now follow player when player is close.
+* Added Player attack rectangle (*for hitting enemies*)
 
 <h4>Version 0.01</h4>
 * Player and walking animations.
