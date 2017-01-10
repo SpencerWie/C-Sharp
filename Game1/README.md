@@ -10,6 +10,7 @@ Updates to the main game along with it's current progress will be recored here t
 <h4>Version 0.03</h4>
 * Enemys now get pushed back from player hits and turn red when hit.
 * Balanced player attack system, collisions line up with sword swings and attacks are more accurate.
+* Code Restructured for beter scaleability and maintance.
 
 <h4>Version 0.02</h4>
 * Added basic lighting system (*back world light and object light*), placed into *Map* class.
