@@ -13,6 +13,7 @@ Updates to the main game along with it's current progress will be recored here t
 * Code Restructured for beter scaleability and maintance.
 * *Map* now includes a Texture class for adding 2D textures.
 * Enemies are now placed using a second layer, each enemy as a certain location for each map.
+* Enemies now have health and can be killed.
 
 <h4>Version 0.02</h4>
 * Added basic lighting system (*back world light and object light*), placed into *Map* class.
