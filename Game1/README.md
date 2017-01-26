@@ -12,7 +12,7 @@ Updates to the main game along with it's current progress will be recored here t
 * Balanced player attack system, collisions line up with sword swings and attacks are more accurate.
 * Code Restructured for beter scaleability and maintance.
 * *Map* now includes a Texture class for adding 2D textures.
-* Enemies are now placed using a second layer, each enemy as a certain location for each map.
+* Enemies are now placed using a second layer, each enemy has a certain location for each map.
 * Enemies now have health and can be killed.
 
 <h4>Version 0.02</h4>
