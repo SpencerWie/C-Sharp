@@ -1,3 +1,5 @@
+**Update**: Due to having to do a factory restore on my computer I had to get a old copy and then re-impement the features. We should be up -to-date now and will be able to further update the game on versions 0.03. I'll check-in my code more often to Bit Bucket to ensure we don't have a signifanct loss again.
+
 Note that the on-going proccess of this directory has been switched to a private repository. The commits from the private will be updated through this file below explaining the current state of the game.
 
 Updates to the main game along with it's current progress will be recored here to give an idea where the project is at along with it's documentation.
