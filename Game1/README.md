@@ -1,5 +1,3 @@
-**Update**: Due to having to do a factory restore on my computer I had to get a old copy and then re-impement the features. We should be up -to-date now and will be able to further update the game on versions 0.03+. The updated source code as been checked into Bit Bucket to ensure we don't have a signifanct loss again.
-
 Note that the on-going proccess of this directory has been switched to a private repository. The commits from the private will be updated through this file below explaining the current state of the game.
 
 Updates to the main game along with it's current progress will be recored here to give an idea where the project is at along with it's documentation.
@@ -16,7 +14,7 @@ Updates to the main game along with it's current progress will be recored here t
 * *Map* now includes a Texture class for adding 2D textures.
 * Enemies are now placed using a second layer, each enemy has a certain location for each map.
 * Enemies now have health and can be killed.
-* Basic menu system in progress (*small item storage*)
+* Basic menu system in progress (*small item storage, item sprites, menu sprites*)
 
 <h4>Version 0.02</h4>
 * Added basic lighting system (*back world light and object light*), placed into *Map* class.
