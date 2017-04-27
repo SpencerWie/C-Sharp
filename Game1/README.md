@@ -36,4 +36,4 @@ Updates to the main game along with it's current progress will be recored here t
 
 ---
 
-*Note:* A update will be made to this readme file whenever an importaint commit is made in the private directory of this project. 
+*Note:* A update will be made to this readme file whenever a commit is made in the private directory of this project. Some commits may seem trivial or may have counters on the end of a worked on item (*ex: foo - 9*) means there where 9 commits for task *"foo"*.
