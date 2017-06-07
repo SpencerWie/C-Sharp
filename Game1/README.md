@@ -15,7 +15,7 @@ Updates to the main game along with it's current progress will be recored here t
 * *Map* now includes a Texture class for adding 2D textures.
 * Enemies are now placed using a second layer, each enemy has a certain location for each map.
 * Enemies now have health and can be killed.
-* Basic menu system in progress (*small item storage, item sprites, menu sprites*) - 3
+* Basic menu system in progress (*small item storage, item sprites, menu sprites*) - 4
 * Code Refactoring for better scalability (*Mostly for enemy classes*) - 4
 
 <h4>Version 0.02</h4>
