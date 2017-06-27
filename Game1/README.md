@@ -16,7 +16,9 @@ Updates to the main game along with it's current progress will be recored here t
 * Enemies are now placed using a second layer, each enemy has a certain location for each map. - 1
 * Enemies now have health and can be killed. - 1
 * Basic menu system in progress (*small item storage, item sprites, menu sprites*) - 4
-* Code Refactoring for better scalability (*Mostly for enemy classes*) - 6
+* Code Refactoring for better scalability (*Mostly for enemy classes*) - 7
+  * Refactored collision Tiles, Added Enemy class with an Interface for general enemeies.
+  * **Bug Notice**: This caused issues with slimes getting hit (*not moving horizally on hit, always move up at the start*)
 
 <h4>Version 0.02</h4>
 
