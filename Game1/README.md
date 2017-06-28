@@ -7,19 +7,28 @@ Updates to the main game along with it's current progress will be recored here t
 
 <img src="gamePic.PNG"></img>
 
-<h4>**Version 0.03**</h4>
+*<h4>Version 0.04</h4>*
+
+* Player Health bar, takes damage from enemies. (*planned*)
+* Player Stamina bar, running and attack will take stamina. (*planned*)
+* Player can now be knocked back from getting hit by enemies. (*planned*)
+* Basic visual inventory system. (*planned*)
+* Player can now pickup items. (*planned*) 
+* Enemies have a change of dropping items. (*planned*)
+
+**<h4>Version 0.03</h4>**
 
 * Enemys now get pushed back from player hits and turn red when hit.
 * Balanced player attack system, collisions line up with sword swings and attacks are more accurate.
 * Code Restructured for beter scaleability and maintance.
 * *Map* now includes a Texture class for adding 2D textures.
-* Enemies are now placed using a second layer, each enemy has a certain location for each map. - 1
-* Enemies now have health and can be killed. - 1
-* Basic menu system in progress (*small item storage, item sprites, menu sprites*) - 4
-* Code Refactoring for better scalability (*Mostly for enemy classes*) - 7
+* Enemies are now placed using a second layer, each enemy has a certain location for each map. 
+* Enemies now have health and can be killed.
+* Basic menu system in progress (*small item storage, item sprites, menu sprites*) 
+* Code Refactoring for better scalability (*Mostly for enemy classes*) 
   * Refactored collision Tiles, Added Enemy class with an Interface for general enemeies.
 
-<h4>**Version 0.02**</h4>
+**<h4>Version 0.02</h4>**
 
 * Added basic lighting system (*back world light and object light*), placed into *Map* class.
 * Added Attacking Animation
@@ -30,7 +39,7 @@ Updates to the main game along with it's current progress will be recored here t
 * Slimes now follow player when player is close based on a radius distance.
 * Added Player attack rectangle (*for hitting enemies*)
 
-<h4>**Version 0.01**</h4>
+**<h4>**Version 0.01**</h4>**
 
 * Player and walking animations.
 * Tilemapping system.
