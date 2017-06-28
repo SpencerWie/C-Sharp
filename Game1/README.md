@@ -7,7 +7,7 @@ Updates to the main game along with it's current progress will be recored here t
 
 <img src="gamePic.PNG"></img>
 
-<h4>Version 0.03</h4>
+<h4>**Version 0.03**</h4>
 
 * Enemys now get pushed back from player hits and turn red when hit.
 * Balanced player attack system, collisions line up with sword swings and attacks are more accurate.
@@ -19,7 +19,7 @@ Updates to the main game along with it's current progress will be recored here t
 * Code Refactoring for better scalability (*Mostly for enemy classes*) - 7
   * Refactored collision Tiles, Added Enemy class with an Interface for general enemeies.
 
-<h4>Version 0.02</h4>
+<h4>**Version 0.02**</h4>
 
 * Added basic lighting system (*back world light and object light*), placed into *Map* class.
 * Added Attacking Animation
@@ -30,7 +30,7 @@ Updates to the main game along with it's current progress will be recored here t
 * Slimes now follow player when player is close based on a radius distance.
 * Added Player attack rectangle (*for hitting enemies*)
 
-<h4>Version 0.01</h4>
+<h4>**Version 0.01**</h4>
 
 * Player and walking animations.
 * Tilemapping system.
@@ -41,4 +41,8 @@ Updates to the main game along with it's current progress will be recored here t
 
 ---
 
-*Note:* A update will be made to this readme file whenever a commit is made in the private directory of this project. Some commits may seem trivial or may have counters on the end of a worked on item (*ex: foo - 9*) means there where 9 commits for task *"foo"*.
+*Notes:* 
+
+A update will be made to this readme file whenever a commit is made in the private directory of this project. Some commits may seem trivial or may have counters on the end of a worked on item (*ex: foo - 9*) means there where 9 commits for task *"foo"*.
+
+**Bolded** versions mean that version is complete, *italic* means the version is still in progress.
