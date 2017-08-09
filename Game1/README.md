@@ -1,4 +1,4 @@
-Note that the on-going proccess of this directory has been switched to a private repository. The commits from the private will be updated through this file below explaining the current state of the game.
+Note that the on-going proccess, this directory has been switched to a private repository. The commits from the private will be updated through this file below explaining the current state of the game.
 
 Updates to the main game along with it's current progress will be recored here to give an idea where the project is at along with it's documentation.
 
