@@ -10,11 +10,11 @@ Updates to the main game along with it's current progress will be recored here t
 *<h4>Version 0.04</h4>*
 
 * Player Health bar, takes damage from enemies. (*done*)
-* Player Stamina bar, running and attack will take stamina. -1
-* Player can now be knocked back from getting hit by enemies. (*planned*)
+* Player Stamina bar, running and attack will take stamina. (*done*)
+* ~~Player can now be knocked back from getting hit by enemies. (*removed/deffered*)~~
 * Basic visual inventory system. (*planned*)
 * Player can now pickup items. (*planned*) 
-* Enemies have a change of dropping items. (*planned*)
+* Enemies have a chance of dropping items. (*planned*)
 
 **<h4>Version 0.03</h4>**
 
