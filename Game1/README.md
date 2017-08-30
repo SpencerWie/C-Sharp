@@ -12,7 +12,7 @@ Updates to the main game along with it's current progress will be recored here t
 * Player Health bar, takes damage from enemies. (*done*)
 * Player Stamina bar, running and attack will take stamina. (*done*)
 * ~~Player can now be knocked back from getting hit by enemies. (*removed/deffered*)~~
-* Basic visual inventory system. -3
+* Basic visual inventory system. -4
 * Player can now pickup items. (*planned*) 
 * Enemies have a chance of dropping items. (*planned*)
 
