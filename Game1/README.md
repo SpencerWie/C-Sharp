@@ -14,7 +14,7 @@ Updates to the main game along with it's current progress will be recored here t
 * ~~Player can now be knocked back from getting hit by enemies. (*removed/deffered*)~~
 * Basic visual inventory system. - 6
 * Player can now pickup items. - 2
-* Enemies have a chance of dropping items. - 1
+* Enemies have a chance of dropping items. - 2
 
 **<h4>Version 0.03</h4>**
 
