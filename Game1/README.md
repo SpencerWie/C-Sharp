@@ -5,7 +5,7 @@ Updates to the main game along with it's current progress will be recored here t
 ---
 <h3>Town RPG</h3>
 
-<img src="https://imgur.com/a/XzjXr"></img>
+<img src="https://i.imgur.com/A4K6B6T.png"></img>
 
 *<h4>Version 0.04</h4>*
 
