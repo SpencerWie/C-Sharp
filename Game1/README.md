@@ -13,8 +13,9 @@ Updates to the main game along with it's current progress will be recored here t
 * Player Stamina bar, running and attack will take stamina. (*done*)
 * ~~Player can now be knocked back from getting hit by enemies. (*removed/deffered*)~~
 * Basic visual inventory system. - 8
-* Player can now pickup items. - 3
+* Player can now pickup items. - 4
 * Enemies have a chance of dropping items. - 3
+* Added base game items (coins, weapons, armor, etc)
 
 **<h4>Version 0.03</h4>**
 
